@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ארטם בויקוב | אימון מנטלי וביצועי שיא</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --ice-blue: #f0f9ff;
+        --deep-arctic: #0c4a6e;
+        --frost-accent: #00e5ff;
+      }
+      body {
+        font-family: 'Heebo', sans-serif;
+        scroll-behavior: smooth;
+        background: #f8fafc;
+        overflow-x: hidden;
+      }
+      .mesh-bg {
+        background-color: #f8fafc;
+        background-image: 
+          radial-gradient(at 0% 0%, hsla(203,100%,96%,1) 0, transparent 50%), 
+          radial-gradient(at 100% 0%, hsla(199,100%,93%,1) 0, transparent 50%), 
+          radial-gradient(at 100% 100%, hsla(201,100%,95%,1) 0, transparent 50%), 
+          radial-gradient(at 0% 100%, hsla(190,100%,94%,1) 0, transparent 50%);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+      }
+      .ice-button {
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.3);
+        transition: all 0.3s ease;
+      }
+      .ice-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px -5px rgba(2, 132, 199, 0.4);
+      }
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+      @keyframes floating {
+        0% { transform: translate(0, 0px); }
+        50% { transform: translate(0, 15px); }
+        100% { transform: translate(0, -0px); }
+      }
+      .text-gradient {
+        background: linear-gradient(to bottom right, #0c4a6e, #0369a1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react": "https://esm.sh/react@^19.2.3",
+        "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+      }
+    }
+    </script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body class="mesh-bg text-slate-900">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

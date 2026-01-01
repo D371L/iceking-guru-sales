@@ -5,6 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ארטם בויקוב | אימון מנטלי וביצועי שיא</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="ארטם בויקוב - מאמן מנטלי מוסמך בגישת NLP. אימון מנטלי וביצועי שיא לאנשים שמוכנים לקחת שליטה על חייהם. כלים פרקטיים שעובדים ביום-יום.">
+    <meta name="keywords" content="אימון מנטלי, NLP, ארטם בויקוב, ביצועי שיא, אימון אישי, מנטליות, שליטה עצמית">
+    <meta name="author" content="Artem Boikov">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ארטם בויקוב | אימון מנטלי וביצועי שיא">
+    <meta property="og:description" content="הגיע הזמן להפסיק לפעול על אוטומט. בוא נבנה את הזהות המנצחת שלך.">
+    <meta property="og:locale" content="he_IL">
+    
+    <!-- Preconnect для быстрой загрузки -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    
+    <!-- Preload критичных ресурсов -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;700;900&display=swap" as="style">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -33,6 +53,11 @@
         -webkit-backdrop-filter: blur(16px) saturate(180%);
         border: 1px solid rgba(255, 255, 255, 0.6);
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        transition: all 0.3s ease;
+      }
+      .glass-card:hover {
+        box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.15);
+        transform: translateY(-2px);
       }
       .ice-button {
         background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
@@ -55,6 +80,30 @@
         background: linear-gradient(to bottom right, #0c4a6e, #0369a1);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+      }
+      .ice-glow {
+        box-shadow: 0 0 20px rgba(2, 132, 199, 0.4);
+      }
+      .ice-gradient {
+        background: linear-gradient(180deg, #f8fafc 0%, #f0f9ff 100%);
+      }
+      /* Анимация появления */
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Улучшенные градиенты и тени */
+      .gradient-shadow {
+        box-shadow: 0 20px 60px -15px rgba(2, 132, 199, 0.3);
+      }
+      .gradient-border {
+        background: linear-gradient(135deg, rgba(2, 132, 199, 0.1), rgba(0, 229, 255, 0.1));
+        border: 1px solid rgba(2, 132, 199, 0.2);
       }
     </style>
     <script type="importmap">

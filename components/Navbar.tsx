@@ -12,6 +12,28 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Проверяем, что это якорная ссылка
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const offset = 100; // Отступ от верха (учитывая высоту навбара)
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+    // Закрываем мобильное меню после клика
+    setIsOpen(false);
+  };
+
   const menuItems = [
     { name: 'בית', href: '#home' },
     { name: 'נעים להכיר', href: '#about' },
@@ -34,6 +56,7 @@ const Navbar: React.FC = () => {
                   <a
                     key={item.name}
                     href={item.href}
+                    onClick={(e) => handleSmoothScroll(e, item.href)}
                     className="text-slate-600 hover:text-blue-600 font-medium text-sm tracking-wide transition-all"
                   >
                     {item.name}
@@ -57,7 +80,11 @@ const Navbar: React.FC = () => {
 
             {/* Left Side: Logo */}
             <div className="flex items-center">
-              <a href="#home" className="text-2xl font-black tracking-tighter text-gradient uppercase">
+              <a 
+                href="#home" 
+                onClick={(e) => handleSmoothScroll(e, '#home')}
+                className="text-2xl font-black tracking-tighter text-gradient uppercase"
+              >
                 ARTEM BOIKOV
               </a>
             </div>
@@ -74,7 +101,7 @@ const Navbar: React.FC = () => {
               <a
                 key={item.name}
                 href={item.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => handleSmoothScroll(e, item.href)}
                 className="text-xl font-bold text-slate-800 hover:text-blue-600 transition-colors"
               >
                 {item.name}

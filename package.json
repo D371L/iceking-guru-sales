@@ -7,7 +7,7 @@
     "preview": "python3 -m http.server 8000"
   },
   "keywords": ["mental-coaching", "nlp", "coaching"],
-  "author": "Artem Boikov",
+  "author": "D371L",
   "license": "MIT"
 }
 

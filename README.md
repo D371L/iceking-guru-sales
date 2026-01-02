@@ -4,71 +4,71 @@
 ![Open Source](https://img.shields.io/badge/Open%20Source-Yes-brightgreen.svg)
 ![Author](https://img.shields.io/badge/Built%20By-D371L-orange.svg)
 
-Привет! Я **D371L**.
+Hi! I am **D371L**.
 
-Я разработал этот высококонверсионный лендинг для реального клиента — ментального коуча **Артема Бойкова** (Artem Boikov). Проект показал отличные результаты в продакшене, и мы решили открыть исходный код.
+I developed this high-conversion landing page for a real client — mental coach **Artem Boikov**. The project delivered excellent results in production, so we decided to open-source the code.
 
-Теперь это **Open Source**. Это значит, что вы можете брать этот код, менять тексты, картинки и цвета, и использовать его для своего бизнеса или портфолио абсолютно бесплатно.
+This project is now **Open Source**. This means you can take this code, modify the text, images, and colors, and use it for your own business or portfolio completely for free.
 
-Посмотреть демо (боевой сайт): [mindset.iceking.guru](https://mindset.iceking.guru)
+**Live Demo:** [mindset.iceking.guru](https://mindset.iceking.guru)
 
-## 💡 Философия проекта
+## 💡 Project Philosophy
 
-Этот проект — антитеза "тяжелым" сайтам на WordPress или React для простых задач.
-- **0 зависимостей**: Никаких `npm install` для запуска.
-- **Чистый код**: HTML5, Tailwind CSS (через CDN для простоты) и Vanilla JS.
-- **Скорость**: Мгновенная загрузка и 100/100 в Google PageSpeed.
-- **RTL**: Полная поддержка иврита (Right-to-Left), но легко адаптируется под любой язык.
+This project is the antithesis of "heavy" websites built on WordPress or React for simple tasks.
+- **0 Dependencies**: No `npm install` needed to run.
+- **Clean Code**: Pure HTML5, Tailwind CSS (via CDN for simplicity), and Vanilla JavaScript.
+- **Speed**: Instant load times and 100/100 in Google PageSpeed.
+- **RTL**: Full Hebrew support (Right-to-Left), but easily adaptable to any language.
 
-## 🚀 Как запустить свой сайт за 5 минут
+## 🚀 How to Launch in 5 Minutes
 
-Вам не нужно быть программистом. Просто скачайте файлы.
+You don't need to be a programmer. Just download the files.
 
-1. **Клонируйте или скачайте** этот репозиторий.
-2. Откройте `index.html` в любом браузере. Сайт уже работает!
-3. Откройте этот же файл в текстовом редакторе (VS Code, Notepad++), чтобы поменять контент.
+1. **Clone or Download** this repository.
+2. Open `index.html` in any browser. The site is already working!
+3. Open the same file in a text editor (VS Code, Notepad++) to change the content.
 
-## ⚙️ Что нужно заменить (Чек-лист)
+## ⚙️ Configuration Checklist (Important)
 
-Так как это код реального проекта, в нем остались данные клиента. **Обязательно замените их на свои:**
+Since this is code from a live project, it contains the client's real data. **You must replace the following with your own:**
 
-1.  **Контакты:**
-    *   Найдите номер телефона `972543319843` и замените на свой (для WhatsApp кнопок).
-    *   Найдите ссылки `wa.me/...` и проверьте, что они ведут на ваш номер.
+1.  **Contacts:**
+    *   Find the phone number `972543319843` and replace it with yours (for WhatsApp buttons).
+    *   Search for `wa.me/...` links and ensure they point to your number.
 
-2.  **SEO и Домен:**
-    *   Замените домен `mindset.iceking.guru` на ваш в `index.html`, `public/sitemap.xml` и `public/robots.txt`.
-    *   Обновите `meta` теги (Title, Description) в `index.html`.
+2.  **SEO & Domain:**
+    *   Replace the domain `mindset.iceking.guru` with yours in `index.html`, `public/sitemap.xml`, and `public/robots.txt`.
+    *   Update the `meta` tags (Title, Description) in `index.html`.
 
-3.  **Аналитика:**
-    *   В начале `index.html` стоит код Google Analytics (`G-6JGLVDGMD9`). Удалите его или замените на свой ID.
+3.  **Analytics:**
+    *   At the very top of `index.html`, there is a Google Analytics tag (`G-6JGLVDGMD9`). Remove it or replace it with your own Measurement ID.
 
-4.  **Картинки:**
-    *   Замените `header_logo.png`, `favicon.png` и `profilepic.png` на ваши изображения.
+4.  **Images:**
+    *   Replace `header_logo.png`, `favicon.png`, and `profilepic.png` with your own assets.
 
-## 📁 Структура
+## 📁 Project Structure
 
 ```text
 /
-├── index.html          # Вся структура и контент
-├── style.css           # Кастомные стили и анимации
-├── script.js           # Логика (слайдеры, меню, счетчики)
-├── header_logo.png     # Логотип
-├── profilepic.png      # Фото эксперта
-└── public/             # Файлы для поисковиков (robots.txt, sitemap)
+├── index.html          # Main structure and content
+├── style.css           # Custom styles and animations
+├── script.js           # Logic (sliders, mobile menu, counters)
+├── header_logo.png     # Logo
+├── profilepic.png      # Expert's photo
+└── public/             # SEO files (robots.txt, sitemap)
 ```
 
-## 🎨 Технологический стек
+## 🎨 Tech Stack
 
-*   **HTML5** (Семантическая верстка)
-*   **Tailwind CSS** (Стилизация через CDN)
-*   **Vanilla JavaScript** (Без библиотек, только чистый JS)
-*   **Glassmorphism UI** (Трендовый дизайн "матовое стекло")
+*   **HTML5** (Semantic markup)
+*   **Tailwind CSS** (Styling via CDN)
+*   **Vanilla JavaScript** (No libraries, just pure JS)
+*   **Glassmorphism UI** (Modern "frosted glass" design)
 
-## 📄 Лицензия
+## 📄 License
 
-Этот проект распространяется под лицензией **MIT**.
-Вы можете использовать его в личных и коммерческих целях, изменять и распространять без ограничений. Единственное условие — сохранение авторства (не удаляйте файл LICENSE).
+This project is distributed under the **MIT License**.
+You are free to use it for personal and commercial purposes, modify, and distribute it without restriction. The only requirement is to keep the attribution (do not remove the LICENSE file).
 
 ---
 

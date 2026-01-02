@@ -35,14 +35,16 @@ body {
 }
 
 .ice-button {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.3);
+  background: #2096A8;
+  box-shadow: 0 4px 12px rgba(32, 150, 168, 0.3);
   transition: all 0.3s ease;
+  border-radius: 9999px;
 }
 
 .ice-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px -5px rgba(2, 132, 199, 0.4);
+  background: #1a7a88;
+  box-shadow: 0 6px 16px rgba(32, 150, 168, 0.4);
+  transform: translateY(-1px);
 }
 
 .floating {
@@ -58,6 +60,7 @@ body {
 .text-gradient {
   background: linear-gradient(to bottom right, #0c4a6e, #0369a1);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

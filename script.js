@@ -168,7 +168,7 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, observerOptions);
+}, fadeObserverOptions);
 
 // Observe all fade-in-up elements
 document.querySelectorAll('.fade-in-up').forEach(el => {
@@ -178,6 +178,12 @@ document.querySelectorAll('.fade-in-up').forEach(el => {
 // ============================================
 // Testimonials Slider
 // ============================================
+
+let testimonialText;
+let testimonialAuthor;
+let testimonialPrev;
+let testimonialNext;
+let testimonialIndicators;
 
 const testimonials = [
   { name: "אורן", text: "אחי, זה לא יאמן כמה הראש שלי היה עמוס לפני. היום יש לי סדר, יש לי כיוון, ואני מפסיק לברוח מדברים. זה שינה לי את היום־יום." },

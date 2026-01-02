@@ -9,23 +9,68 @@ const menuIcon = document.getElementById('menu-icon');
 const closeIcon = document.getElementById('close-icon');
 let isMenuOpen = false;
 
-// Navbar scroll effect
+// Navbar scroll effect with glass morphism
+let lastScrollY = 0;
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) {
+  if (!navbar) return;
+  
+  const navInner = navbar.querySelector('.max-w-7xl > div');
+  if (!navInner) return;
+  
+  const currentScrollY = window.scrollY;
+  
+  if (currentScrollY > 20) {
+    // Apply glass effect when scrolled
     navbar.classList.remove('py-6');
     navbar.classList.add('py-3');
-    const navInner = navbar.querySelector('.max-w-7xl > div');
+    
+    // Navbar itself should be transparent (no white background)
+    navbar.style.backgroundColor = 'transparent';
+    navbar.style.backdropFilter = '';
+    navbar.style.webkitBackdropFilter = '';
+    navbar.style.boxShadow = '';
+    navbar.style.borderBottom = '';
+    
+    // Apply glass effect to inner container (rounded, glass morphism)
     if (navInner) {
-      navInner.classList.add('glass-card', 'px-6', 'sm:px-8', 'py-3');
+      navInner.classList.add('glass-card');
+      navInner.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+      navInner.style.backdropFilter = 'blur(20px) saturate(180%)';
+      navInner.style.webkitBackdropFilter = 'blur(20px) saturate(180%)';
+      navInner.style.border = '1px solid rgba(255, 255, 255, 0.6)';
+      navInner.style.boxShadow = '0 8px 32px 0 rgba(31, 38, 135, 0.15)';
+      navInner.style.borderRadius = '2rem';
+      navInner.style.paddingLeft = '1.5rem';
+      navInner.style.paddingRight = '1.5rem';
+      navInner.style.paddingTop = '0.75rem';
+      navInner.style.paddingBottom = '0.75rem';
     }
   } else {
+    // Remove glass effect when at top
     navbar.classList.remove('py-3');
     navbar.classList.add('py-6');
-    const navInner = navbar.querySelector('.max-w-7xl > div');
+    navbar.style.backgroundColor = 'transparent';
+    navbar.style.backdropFilter = '';
+    navbar.style.webkitBackdropFilter = '';
+    navbar.style.boxShadow = '';
+    navbar.style.borderBottom = '';
+    
     if (navInner) {
-      navInner.classList.remove('glass-card', 'px-6', 'sm:px-8', 'py-3');
+      navInner.classList.remove('glass-card');
+      navInner.style.backgroundColor = '';
+      navInner.style.backdropFilter = '';
+      navInner.style.webkitBackdropFilter = '';
+      navInner.style.border = '';
+      navInner.style.boxShadow = '';
+      navInner.style.borderRadius = '';
+      navInner.style.paddingLeft = '';
+      navInner.style.paddingRight = '';
+      navInner.style.paddingTop = '';
+      navInner.style.paddingBottom = '';
     }
   }
+  
+  lastScrollY = currentScrollY;
 });
 
 // Mobile menu toggle
@@ -109,7 +154,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
 // Intersection Observer for Animations
 // ============================================
 
-const observerOptions = {
+const fadeObserverOptions = {
   threshold: 0.1,
   rootMargin: '0px 0px -50px 0px'
 };
@@ -138,33 +183,33 @@ const testimonials = [
   { name: "אורן", text: "אחי, זה לא יאמן כמה הראש שלי היה עמוס לפני. היום יש לי סדר, יש לי כיוון, ואני מפסיק לברוח מדברים. זה שינה לי את היום־יום." },
   { name: "דניאל", text: "הגעתי אחרי השחרור בלי מושג מה אני רוצה מעצמי. המפגשים איתך עשו לי סדר, פתאום יש מטרה ויש דרך. מרגיש הרבה יותר יציב." },
   { name: "יואב", text: "חשבתי שזה יהיה עוד אימון רגשי כזה... אבל זה היה פרקטי בטירוף. כלים שאני באמת משתמש בהם כשיש לחץ." },
-  { name: "עידו", text: "הקטע עם הלחץ פתח לי משהו בראש. פעם הייתי ננעל, היום אני יודע איך לעבוד איתו. מרגיש הרבה יותר חד." }
+  { name: "עידו", text: "הקטע עם הלחץ פתח לי משהו בראש. פעם הייתי ננעל, היום אני יודע איך לעבוד איתו. מרגיש הרבה יותר חד." },
+  { name: "אלון", text: "לא הבנתי עד כמה אמונות קטנות מנהלות אותי. ברגע שזיהינו את זה – הכול התחיל לזוז. מרגיש בן אדם אחר." },
+  { name: "רועי", text: "זה לא תהליך קל, אבל הוא אמיתי. מי שמוכן לעבוד על עצמו — זה שווה כל רגע." },
+  { name: "ניר", text: "הייתי תקוע בעבודה שלא רציתי ולא ידעתי מה הצעד הבא. פתאום יש לי ביטחון לקבל החלטות ולא לדחות." },
+  { name: "תומר", text: "לא חיפשתי מוטיבציה — חיפשתי שליטה. וקיבלתי בדיוק את זה." }
 ];
 
-let currentTestimonialIndex = 0;
+let currentTestimonialIndex = 0; // Start with first testimonial (Oren) as shown in the image
 let isAutoPlaying = true;
 let testimonialInterval = null;
 
-const testimonialText = document.getElementById('testimonial-text');
-const testimonialAuthor = document.getElementById('testimonial-author');
-const testimonialPrev = document.getElementById('testimonial-prev');
-const testimonialNext = document.getElementById('testimonial-next');
-const testimonialIndicators = document.querySelectorAll('.testimonial-indicator');
+// Variables will be initialized in initializeTestimonials()
 
 function updateTestimonial(index) {
   if (testimonialText && testimonialAuthor) {
-    testimonialText.textContent = `"${testimonials[index].text}"`;
+    testimonialText.textContent = testimonials[index].text;
     testimonialAuthor.querySelector('span').textContent = testimonials[index].name;
     
     // Update indicators
     testimonialIndicators.forEach((indicator, i) => {
       if (i === index) {
-        indicator.classList.remove('w-2', 'bg-slate-600');
+        indicator.classList.remove('w-2', 'bg-white/30');
         indicator.classList.add('w-8', 'bg-blue-500');
         indicator.setAttribute('aria-selected', 'true');
       } else {
         indicator.classList.remove('w-8', 'bg-blue-500');
-        indicator.classList.add('w-2', 'bg-slate-600');
+        indicator.classList.add('w-2', 'bg-white/30');
         indicator.setAttribute('aria-selected', 'false');
       }
     });
@@ -201,45 +246,77 @@ function goToTestimonial(index) {
   updateTestimonial(currentTestimonialIndex);
 }
 
-// Initialize testimonials
-if (testimonialText && testimonialAuthor) {
-  updateTestimonial(0);
-  
-  if (testimonialNext) {
-    testimonialNext.addEventListener('click', nextTestimonial);
+// Initialize testimonials - create indicators dynamically
+function initTestimonialIndicators() {
+  const container = document.getElementById('testimonial-indicators-container');
+  if (container) {
+    container.innerHTML = '';
+    testimonials.forEach((_, index) => {
+      const button = document.createElement('button');
+      button.className = `testimonial-indicator h-2 ${index === 0 ? 'w-8 rounded-full bg-blue-500' : 'w-2 rounded-full bg-white/30'} transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900 hover:bg-white/50`;
+      button.setAttribute('aria-label', `הצג המלצה ${index + 1}`);
+      button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+      button.setAttribute('role', 'tab');
+      button.setAttribute('data-index', index);
+      button.addEventListener('click', () => goToTestimonial(index));
+      container.appendChild(button);
+    });
+    testimonialIndicators = document.querySelectorAll('.testimonial-indicator');
   }
+}
+
+// Initialize testimonials when DOM is ready
+function initializeTestimonials() {
+  testimonialText = document.getElementById('testimonial-text');
+  testimonialAuthor = document.getElementById('testimonial-author');
+  testimonialPrev = document.getElementById('testimonial-prev');
+  testimonialNext = document.getElementById('testimonial-next');
   
-  if (testimonialPrev) {
-    testimonialPrev.addEventListener('click', prevTestimonial);
-  }
-  
-  testimonialIndicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => goToTestimonial(index));
-  });
-  
-  // Auto-play testimonials
-  const testimonialsSection = document.getElementById('testimonials');
-  if (testimonialsSection) {
-    const testimonialsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && isAutoPlaying) {
-          testimonialInterval = setInterval(() => {
-            if (isAutoPlaying) {
-              currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-              updateTestimonial(currentTestimonialIndex);
-            }
-          }, 5000);
-        } else {
-          if (testimonialInterval) {
-            clearInterval(testimonialInterval);
-            testimonialInterval = null;
-          }
-        }
-      });
-    }, { threshold: 0.5 });
+  if (testimonialText && testimonialAuthor) {
+    initTestimonialIndicators();
+    updateTestimonial(0); // Start with first testimonial (Oren) as shown in the image
     
-    testimonialsObserver.observe(testimonialsSection);
+    if (testimonialNext) {
+      testimonialNext.addEventListener('click', nextTestimonial);
+    }
+    
+    if (testimonialPrev) {
+      testimonialPrev.addEventListener('click', prevTestimonial);
+    }
+    
+    // Auto-play testimonials
+    const testimonialsSection = document.getElementById('testimonials');
+    if (testimonialsSection) {
+      const testimonialsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && isAutoPlaying) {
+            if (!testimonialInterval) {
+              testimonialInterval = setInterval(() => {
+                if (isAutoPlaying) {
+                  currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+                  updateTestimonial(currentTestimonialIndex);
+                }
+              }, 5000);
+            }
+          } else {
+            if (testimonialInterval) {
+              clearInterval(testimonialInterval);
+              testimonialInterval = null;
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      testimonialsObserver.observe(testimonialsSection);
+    }
   }
+}
+
+// Try to initialize immediately if DOM is already loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeTestimonials);
+} else {
+  initializeTestimonials();
 }
 
 // ============================================
@@ -291,23 +368,75 @@ if (achievementsSection) {
 // Scroll to Top Button
 // ============================================
 
-const scrollTopBtn = document.getElementById('scroll-top-btn');
+let scrollTopBtn = null;
+let aboutSection = null;
 
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    scrollTopBtn?.classList.remove('hidden');
-  } else {
-    scrollTopBtn?.classList.add('hidden');
+function updateScrollTopButton() {
+  // Get button if not already cached
+  if (!scrollTopBtn) {
+    scrollTopBtn = document.getElementById('scroll-top-btn');
   }
+  
+  // Get about section if not already cached
+  if (!aboutSection) {
+    aboutSection = document.getElementById('about');
+  }
+  
+  if (scrollTopBtn && aboutSection) {
+    const aboutRect = aboutSection.getBoundingClientRect();
+    // Show button when about section is visible in viewport or has been scrolled past
+    const isAboutVisible = aboutRect.top < window.innerHeight && aboutRect.bottom > 0;
+    const isAboutPassed = aboutRect.top < 0;
+    
+    if (isAboutVisible || isAboutPassed) {
+      scrollTopBtn.classList.remove('hidden');
+      scrollTopBtn.style.display = 'flex';
+    } else {
+      scrollTopBtn.classList.add('hidden');
+      scrollTopBtn.style.display = 'none';
+    }
+  }
+}
+
+// Initialize scroll to top button when DOM is ready
+function initScrollTopButton() {
+  scrollTopBtn = document.getElementById('scroll-top-btn');
+  
+  if (scrollTopBtn) {
+    // Check initial state
+    updateScrollTopButton();
+    
+    // Add click handler
+    scrollTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+  }
+}
+
+// Add scroll listener (only once, outside function to avoid duplicates)
+window.addEventListener('scroll', updateScrollTopButton);
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollTopButton();
+  // Also check after a short delay to ensure everything is loaded
+  setTimeout(() => {
+    updateScrollTopButton();
+  }, 100);
 });
 
-if (scrollTopBtn) {
-  scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
+// Also initialize immediately if DOM is already loaded
+if (document.readyState !== 'loading') {
+  initScrollTopButton();
+  setTimeout(() => {
+    updateScrollTopButton();
+  }, 100);
 }
 
 // ============================================
@@ -348,19 +477,88 @@ if (currentYearElement) {
 }
 
 // ============================================
+// Image Error Handling
+// ============================================
+
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('error', function() {
+    // Fallback to placeholder if image fails to load
+    if (!this.dataset.fallback) {
+      this.dataset.fallback = 'true';
+      this.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'1000\'%3E%3Crect width=\'800\' height=\'1000\' fill=\'%23e0f2fe\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dominant-baseline=\'middle\' font-family=\'Arial\' font-size=\'24\' fill=\'%230364a1\'%3EImage%3C/text%3E%3C/svg%3E';
+    }
+  });
+});
+
+// ============================================
+// Intersection Observer for Fade-in Animations
+// ============================================
+
+const fadeInObserverOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, fadeInObserverOptions);
+
+// ============================================
 // Initialize on DOM Load
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Trigger initial animations for elements already in viewport
+  // Initialize testimonials if not already initialized
+  if (!testimonialText || !testimonialAuthor) {
+    initializeTestimonials();
+  } else if (!testimonialText.textContent.trim()) {
+    updateTestimonial(0);
+  }
+  
+  // Initialize navbar scroll effect
+  if (navbar) {
+    const navInner = navbar.querySelector('.max-w-7xl > div');
+    if (navInner && window.scrollY > 20) {
+      navbar.classList.remove('py-6');
+      navbar.classList.add('py-3');
+      navbar.style.backgroundColor = 'transparent';
+      navInner.classList.add('glass-card');
+      navInner.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+      navInner.style.backdropFilter = 'blur(20px) saturate(180%)';
+      navInner.style.webkitBackdropFilter = 'blur(20px) saturate(180%)';
+      navInner.style.border = '1px solid rgba(255, 255, 255, 0.6)';
+      navInner.style.boxShadow = '0 8px 32px 0 rgba(31, 38, 135, 0.15)';
+      navInner.style.borderRadius = '2rem';
+    }
+  }
+  
+  // Scroll to top button is initialized in initScrollTopButton()
+  
+  // Set up Intersection Observer for all fade-in-up elements
   const fadeElements = document.querySelectorAll('.fade-in-up');
   fadeElements.forEach(el => {
+    // Check if element is already in viewport
     const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight) {
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
       el.classList.add('visible');
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
+    } else {
+      fadeObserver.observe(el);
     }
+  });
+  
+  // Also observe elements with opacity-0 translate-y-10 classes
+  const hiddenElements = document.querySelectorAll('.opacity-0.translate-y-10');
+  hiddenElements.forEach(el => {
+    fadeObserver.observe(el);
   });
 });
 

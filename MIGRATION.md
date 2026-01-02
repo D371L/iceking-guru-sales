@@ -1,4 +1,4 @@
-# Миграция с React на чистый HTML/CSS/JS
+image.png# Миграция с React на чистый HTML/CSS/JS
 
 ## ✅ Что было сделано
 

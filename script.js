@@ -154,26 +154,8 @@ document.querySelectorAll('.nav-link').forEach(link => {
 // Intersection Observer for Animations
 // ============================================
 
-const fadeObserverOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
+// Animation logic is handled by fadeObserver below
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-      observer.unobserve(entry.target);
-    }
-  });
-}, fadeObserverOptions);
-
-// Observe all fade-in-up elements
-document.querySelectorAll('.fade-in-up').forEach(el => {
-  observer.observe(el);
-});
 
 // ============================================
 // Testimonials Slider
@@ -348,7 +330,7 @@ function animateCounter(element, target, suffix, duration = 2000) {
   }, stepTime);
 }
 
-const achievementsSection = document.querySelector('.ice-gradient section');
+const achievementsSection = document.getElementById('achievements');
 if (achievementsSection) {
   const countersObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

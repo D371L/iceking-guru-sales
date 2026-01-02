@@ -12,6 +12,4 @@ Allow: /robots.txt
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://yourdomain.com/sitemap.xml
-Sitemap: https://yourdomain.com/sitemap-images.xml
-
+Sitemap: https://mindset.iceking.guru/sitemap.xml

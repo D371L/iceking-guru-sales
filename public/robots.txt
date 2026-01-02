@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+
+# Разрешить важные файлы
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Crawl-delay для вежливости
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://yourdomain.com/sitemap-images.xml
+

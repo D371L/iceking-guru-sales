@@ -46,6 +46,7 @@ const Testimonials: React.FC = () => {
       id="testimonials" 
       className="py-24 sm:py-32 bg-slate-900 text-white overflow-hidden relative"
       ref={ref as React.RefObject<HTMLElement>}
+      aria-label="המלצות לקוחות על אימון מנטלי"
     >
       {/* Decorative Blur */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 blur-[120px]"></div>
@@ -76,14 +77,21 @@ const Testimonials: React.FC = () => {
 
         <div className="relative">
           <Quote className="absolute -top-12 -right-8 text-blue-500/10 w-24 h-24 sm:w-32 sm:h-32" />
-          <div className="min-h-[250px] sm:min-h-[300px] flex flex-col justify-center">
-             <p className="text-2xl sm:text-3xl lg:text-5xl font-light leading-tight mb-8 sm:mb-12 transition-all duration-500">
+          <div className="min-h-[250px] sm:min-h-[300px] flex flex-col justify-center" itemScope itemType="https://schema.org/Review">
+            <blockquote itemProp="reviewBody" className="text-2xl sm:text-3xl lg:text-5xl font-light leading-tight mb-8 sm:mb-12 transition-all duration-500">
               "{testimonials[currentIndex].text}"
-            </p>
+            </blockquote>
             <div className="flex items-center gap-4 sm:gap-6">
               <div className="w-12 sm:w-16 h-1 bg-blue-500"></div>
-              <h4 className="text-2xl sm:text-3xl font-black tracking-wide">{testimonials[currentIndex].name}</h4>
+              <cite itemProp="author" itemScope itemType="https://schema.org/Person" className="text-2xl sm:text-3xl font-black tracking-wide not-italic">
+                <span itemProp="name">{testimonials[currentIndex].name}</span>
+              </cite>
             </div>
+            <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating" className="hidden">
+              <meta itemProp="ratingValue" content="5" />
+              <meta itemProp="bestRating" content="5" />
+            </div>
+            <meta itemProp="datePublished" content="2024-01-15" />
           </div>
         </div>
 

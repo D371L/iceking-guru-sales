@@ -53,6 +53,16 @@ const App: React.FC = () => {
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 ice-glow min-w-[56px] min-h-[56px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
         aria-label="צור קשר דרך WhatsApp"
+        onClick={() => {
+          // Google Analytics event tracking
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'whatsapp_click', {
+              event_category: 'engagement',
+              event_label: 'floating_button',
+              value: 1
+            });
+          }
+        }}
       >
         <MessageSquare size={28} />
       </a>

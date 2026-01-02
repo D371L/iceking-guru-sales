@@ -72,6 +72,8 @@ const Navbar: React.FC = () => {
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'py-3' : 'py-6'}`}
       role="navigation"
       aria-label="ניווט ראשי"
+      itemScope
+      itemType="https://schema.org/SiteNavigationElement"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className={`transition-all duration-500 rounded-3xl ${scrolled ? 'glass-card px-6 sm:px-8 py-3' : 'px-4'}`}>
@@ -88,8 +90,9 @@ const Navbar: React.FC = () => {
                     onClick={(e) => handleSmoothScroll(e, item.href)}
                     className="text-slate-600 hover:text-blue-600 font-medium text-sm tracking-wide transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg px-2 py-1 min-h-[44px] flex items-center"
                     aria-label={`נווט ל${item.name}`}
+                    itemProp="url"
                   >
-                    {item.name}
+                    <span itemProp="name">{item.name === 'אימון מנטלי' ? <strong>{item.name}</strong> : item.name}</span>
                   </a>
                 ))}
                 <a

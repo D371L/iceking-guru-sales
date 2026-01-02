@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
   const [ref, isVisible] = useIntersectionObserver();
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-24 overflow-hidden">
+    <header id="home" role="banner" className="relative min-h-screen flex items-center pt-24 overflow-hidden">
       {/* Visual Background Elements */}
       <div className="absolute top-20 right-[-10%] w-[500px] h-[500px] bg-blue-200/30 rounded-full blur-[120px] -z-10"></div>
       <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-cyan-100/40 rounded-full blur-[100px] -z-10"></div>
@@ -21,20 +21,25 @@ const Hero: React.FC = () => {
               {/* Decorative Frame */}
               <div className="absolute -inset-4 border border-blue-200 rounded-[2.5rem] opacity-50 group-hover:scale-105 transition-transform duration-700"></div>
               
-              <div className="relative rounded-[2rem] overflow-hidden shadow-2xl glass-card p-2 gradient-shadow">
+              <figure itemScope itemType="https://schema.org/ImageObject" className="relative rounded-[2rem] overflow-hidden shadow-2xl glass-card p-2 gradient-shadow">
                 <img 
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
                   srcSet="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop 400w,
                           https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop 800w,
                           https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop 1200w"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  alt="ארטם בויקוב - מאמן מנטלי מוסמך" 
+                  alt="ארטם בויקוב - מאמן מנטלי מוסמך בגישת NLP, אימון מנטלי וביצועי שיא" 
                   loading="lazy"
                   className="w-full h-auto object-cover rounded-[1.8rem] grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
                   width="800"
                   height="1000"
+                  itemProp="contentUrl"
                 />
-              </div>
+                <figcaption className="sr-only">
+                  <span itemProp="caption">ארטם בויקוב - מאמן מנטלי מוסמך בגישת NLP</span>
+                  <meta itemProp="description" content="מאמן מנטלי מקצועי המתמחה באימון מנטלי וביצועי שיא עם כלים פרקטיים" />
+                </figcaption>
+              </figure>
 
               {/* Float Badge */}
               <div className="absolute -bottom-10 -right-10 glass-card p-6 rounded-3xl floating shadow-xl hidden md:block">
@@ -45,17 +50,16 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Content */}
-          <div className="w-full lg:w-7/12 text-right order-1 lg:order-2">
+          <article className="w-full lg:w-7/12 text-right order-1 lg:order-2">
             <div className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-bold text-sm mb-6 sm:mb-8 tracking-widest">
               MENTAL TRAINING & PEAK PERFORMANCE
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-8xl font-black leading-[1.1] mb-6 sm:mb-8 text-slate-900">
-              שיש שליטה <span className="text-blue-600">בראש</span> <br />
-              יש שליטה <span className="text-gradient">בחיים</span>
+              אימון מנטלי וביצועי שיא | <span className="text-blue-600">ארטם בויקוב</span> - <span className="text-gradient">מאמן מנטלי מוסמך NLP</span>
             </h1>
             <p className="text-xl sm:text-2xl lg:text-3xl text-slate-500 mb-8 sm:mb-12 font-light leading-relaxed">
-              הגיע הזמן להפסיק לפעול על אוטומט.<br />
-              <span className="font-bold text-slate-800">בוא נבנה את הזהות המנצחת שלך.</span>
+              הגיע הזמן להפסיק לפעול על אוטומט. <strong>אימון מנטלי</strong> מקצועי עם כלים פרקטיים שעובדים ביום-יום.<br />
+              <span className="font-bold text-slate-800">בוא נבנה את הזהות המנצחת שלך דרך <strong>אימון אישי</strong> ממוקד.</span>
             </p>
             
             <div className="flex flex-col sm:flex-row-reverse gap-4 sm:gap-6">
@@ -65,6 +69,16 @@ const Hero: React.FC = () => {
                 rel="noopener noreferrer"
                 className="ice-button text-white px-8 sm:px-12 py-5 sm:py-6 rounded-2xl text-xl sm:text-2xl font-black flex items-center justify-center gap-3 group min-h-[56px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 aria-label="צור קשר דרך WhatsApp"
+                onClick={() => {
+                  // Google Analytics event tracking
+                  if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'cta_click', {
+                      event_category: 'conversion',
+                      event_label: 'hero_whatsapp',
+                      value: 1
+                    });
+                  }
+                }}
               >
                 צרו קשר עוד היום
                 <ArrowLeft className="group-hover:-translate-x-2 transition-transform" size={24} />
@@ -74,11 +88,11 @@ const Hero: React.FC = () => {
                 <p className="text-base sm:text-lg font-medium italic">שיחת ייעוץ 1 על 1 ללא עלות</p>
               </div>
             </div>
-          </div>
+          </article>
 
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 

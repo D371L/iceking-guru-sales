@@ -12,4 +12,3 @@ Allow: /robots.txt
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://mindset.iceking.guru/sitemap.xml
